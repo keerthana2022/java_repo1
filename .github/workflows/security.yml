@@ -1,18 +1,19 @@
-name: GitHub Security Alerts for Jira
-
-on: workflow_dispatch
-
-jobs:
-  syncSecurityAlerts:
-    runs-on: ubuntu-latest
-    steps:
-      - name: "Sync security alerts to Jira issues"
-        uses: reload/github-security-jira@v1.x
-        env:
-          GH_SECURITY_TOKEN: ${{ secrets.GITHUBPT }}
-          JIRA_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
-          JIRA_HOST: https://keerthanatest.atlassian.net
-          JIRA_USER: keerthanagvsl64@gmail.com
-          JIRA_PROJECT: TES
           
         
+name: "Sync GHAS to Jira"
+
+on:
+  workflow_dispatch
+
+jobs:
+  test_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sync alerts to Jira issues
+        uses: github/ghas-jira-integration@v1
+        with:
+          jira_url: 'https://keerthanatest.atlassian.net'
+          jira_user: '${{ secrets.JIRA_USER }}'
+          jira_token: '${{ secrets.JIRA_TOKEN }}'
+          jira_project: 'TS'
+          sync_direction: 'gh2jira'
